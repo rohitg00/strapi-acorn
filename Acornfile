@@ -1,0 +1,16 @@
+containers: ghost: {
+	image: "ghost:latest"
+	ports: publish: "2368/http"
+	env: {
+		database__client:               "mysql"
+		database__connection__host:     "@{service.db.address}"
+		database__connection__user:     "@{service.db.secrets.admin.username}"
+		database__connection__password: "@{service.db.secrets.admin.password}"
+		database__connection__database: "@{service.db.data.dbName}"
+	}
+}
+
+services: db: {
+	image: "ghcr.io/acorn-io/mariadb:v0.1.0"
+	serviceArgs: dbName: "ghost"
+}
