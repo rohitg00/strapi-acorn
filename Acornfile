@@ -1,16 +1,18 @@
-containers: ghost: {
-	image: "ghost:latest"
-	ports: publish: "2368/http"
+containers: strapi: {
+	image: "naskio/strapi:4.13.7-alpine"
+	ports: publish: "1337/http"
 	env: {
-		database__client:               "mysql"
-		database__connection__host:     "@{service.db.address}"
-		database__connection__user:     "@{service.db.secrets.admin.username}"
-		database__connection__password: "@{service.db.secrets.admin.password}"
-		database__connection__database: "@{service.db.data.dbName}"
+				DATABASE_CLIENT: "mysql"
+				DATABASE_HOST: "@{service.db.address}"
+				DATABASE_PORT: "@{service.db.port.3306}"
+				DATABASE_NAME: "@{service.db.data.dbName}"
+				DATABASE_USERNAME: "@{service.db.secrets.user.username}"
+				DATABASE_PASSWORD: "@{service.db.secrets.user.password}"	
+				DATABASE_SSL: "false"
 	}
 }
 
 services: db: {
 	image: "ghcr.io/acorn-io/mariadb:v0.1.0"
-	serviceArgs: dbName: "ghost"
+	serviceArgs: dbName: "strapi"
 }
