@@ -23,8 +23,12 @@ Let us have a close look at the Acornfile and see what is defined:
     ghcr.io/rohitg00/strapi-mariadb:latest
     ```
 4. the sample App is now provisioned on the Acorn SaaS Platform and is available for **up to 2 hours**.
-5. Once the Acorn runs, you can access it by clicking the Endpoint or the redirect link.
-
+5. The Strapi container expects me to set up the **admin user** from localhost and not over the Internet. Hence, I’ll forward the local host to 1337 port. Run the below command for the same.
+ ```bash
+    acorn port-forward strapi-mariadb 1337
+ ```
+7. Use the `http://localhost:1337` to set up the Strapi website on your browser.
+   
 ## Acorn Nextcloud App Details
 
 The Acorn Dashboard integrates multiple features such as Events, Logs, Details, and access to the Shell of the Application. Details include the CPU, Memory, Network, Latency, Requests, and Errors for the Application.
